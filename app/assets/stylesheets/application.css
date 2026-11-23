@@ -1,0 +1,10 @@
+/*
+ * Estilos propios de Rubípticos.
+ * Bootstrap (vendor/assets/stylesheets/bootstrap.min.css) se carga antes que este archivo,
+ * así que lo que se define acá pisa a Bootstrap. Ver D13 en docs/decisiones.md.
+ */
+
+/* Backend: franja superior para distinguirlo del sitio público. */
+body.admin {
+  border-top: 4px solid var(--bs-warning);
+}

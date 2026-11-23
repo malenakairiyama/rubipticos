@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  get "como-se-juega", to: "pages#how_to_play", as: :how_to_play
 end
