@@ -15,4 +15,8 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "como-se-juega", to: "pages#how_to_play", as: :how_to_play
+
+  namespace :admin do
+    root "home#index"
+  end
 end

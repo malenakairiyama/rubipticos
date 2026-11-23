@@ -10,6 +10,13 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", "Rubípticos"
   end
 
+  test "la home pública no usa el layout admin" do
+    get root_path
+
+    assert_select "body.admin", count: 0
+    assert_select ".badge", text: "Admin", count: 0
+  end
+
   test "el navbar público colapsa y tiene los cuatro links" do
     get root_path
 
