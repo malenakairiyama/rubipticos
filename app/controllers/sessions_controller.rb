@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if user = User.authenticate_by(params.permit(:email_address, :password))
+    # Un inactivo recibe el mismo error que una contraseña incorrecta (D15).
+    if user = User.active.authenticate_by(params.permit(:email_address, :password))
       start_new_session_for user
       redirect_to after_authentication_url
     else

@@ -26,6 +26,32 @@ class PasswordsControllerTest < ActionDispatch::IntegrationTest
     assert_notice "reset instructions sent"
   end
 
+  test "create for an inactive user responds the same but sends no mail (D15)" do
+    @user.update!(active: false)
+    post passwords_path, params: { email_address: @user.email_address }
+    assert_enqueued_emails 0
+    assert_redirected_to new_session_path
+
+    follow_redirect!
+    assert_notice "reset instructions sent"
+  end
+
+  test "edit and update are rejected for an inactive user (D15)" do
+    token = @user.password_reset_token
+    @user.update!(active: false)
+
+    get edit_password_path(token)
+    assert_redirected_to new_password_path
+
+    assert_no_changes -> { @user.reload.password_digest } do
+      put password_path(token), params: { password: "new", password_confirmation: "new" }
+      assert_redirected_to new_password_path
+    end
+
+    follow_redirect!
+    assert_notice "reset link is invalid"
+  end
+
   test "edit" do
     get edit_password_path(@user.password_reset_token)
     assert_response :success
