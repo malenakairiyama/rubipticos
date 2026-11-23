@@ -21,7 +21,8 @@
 - La respuesta y la explicación de un críptico nunca llegan al navegador antes de que termine la partida.
 - El tiempo y los puntos se calculan siempre en el servidor.
 - Los permisos del admin se controlan en cada controlador, no ocultando links.
+- `ApplicationController` exige login de admin por defecto (generador de auth). Todo controlador del sitio público tiene que declarar `allow_unauthenticated_access`; los del admin no lo declaran.
 
 ## Forma de trabajo
 - Antes de implementar algo nuevo, se propone el diseño y lo valida el equipo.
-- Cada decisión nueva se registra en el diseño (D11, D12…) y se avisa en Discord.
+- Cada decisión nueva se registra en `docs/decisiones.md` con el número siguiente y se avisa en Discord.

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
-    <title><%= content_for(:title) || "Rubipticos" %></title>
+    <title><%= content_for(:title) || "Rubípticos" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Rubipticos">
+    <meta name="application-name" content="Rubípticos">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -18,12 +18,37 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%# Bootstrap primero (D13) y después nuestros estilos de app/assets/stylesheets %>
+    <%= stylesheet_link_tag "bootstrap.min", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-md bg-body-tertiary border-bottom">
+      <div class="container">
+        <%= link_to "Rubípticos", root_path, class: "navbar-brand fw-bold" %>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#public-nav"
+                aria-controls="public-nav" aria-expanded="false" aria-label="Abrir menú">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="public-nav">
+          <ul class="navbar-nav ms-auto">
+            <%# TODO: ruta de Jugar %>
+            <li class="nav-item"><a class="nav-link" href="#">Jugar</a></li>
+            <%# TODO: ruta de Mi racha %>
+            <li class="nav-item"><a class="nav-link" href="#">Mi racha</a></li>
+            <%# TODO: ruta de Tabla de posiciones %>
+            <li class="nav-item"><a class="nav-link" href="#">Tabla de posiciones</a></li>
+            <li class="nav-item"><%= link_to "Cómo se juega", how_to_play_path, class: "nav-link" %></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <%= render "shared/flash" %>
+      <%= yield %>
+    </main>
   </body>
 </html>
