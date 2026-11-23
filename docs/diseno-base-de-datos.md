@@ -20,6 +20,8 @@
 | D8 | Listas del JSON | Columnas `json`, con `CHECK json_valid AND json_type = 'array'` |
 | D9 | Reinicio del ranking | `game_settings.leaderboard_reset_at`, sin borrar partidas |
 | D10 | Tipos de críptico | Los 13 tipos presentes en `cryptics.json` (ver §4.2) |
+| D11 | NOT NULL explícito | NOT NULL en `attempts.status`/`difficulty`/`guesses_count`/`hints_used`/`points` y `sync_logs.status`/`rejections`, porque un `CHECK` deja pasar NULL |
+| D12 | CHECKs adicionales | `CHECK IN` en `attempts.difficulty` (por D2) y `CHECK elapsed_seconds >= 0` en `attempts` |
  
 ---
  
