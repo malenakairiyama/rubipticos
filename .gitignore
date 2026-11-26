@@ -32,3 +32,22 @@
 
 # Ignore key files for decrypting credentials and more.
 /config/*.key
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
+
+# Editores / IDE
+.idea/
+.vscode/
+.ruby-lsp/
+*.swp
+
+# Bases de datos y reportes locales
+/db/*.sqlite3*
+/coverage/
+
+# Dependencias y builds locales
+/node_modules/
+/vendor/bundle/
