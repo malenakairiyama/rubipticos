@@ -1,9 +1,9 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Carga en orden alfabético los archivos de db/seeds/ (01_admin, 02_game_settings,
+# 03_cryptics y, más adelante, 04_dev_players) dentro de una sola transacción.
+# Cada archivo imprime su propia línea; acá solo va el resumen final.
+ActiveRecord::Base.transaction do
+  Dir[Rails.root.join("db/seeds/*.rb")].sort.each { |file| load file }
+end
+
+por_dificultad = Cryptic.group(:difficulty).count.transform_keys { |key| Cryptic.difficulties[key] }
+puts "Crípticos por dificultad: #{por_dificultad.map { |dificultad, cantidad| "#{dificultad} #{cantidad}" }.join(', ')}"
